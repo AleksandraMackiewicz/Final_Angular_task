@@ -14,6 +14,13 @@ import { HomePageComponent } from './subPages/home-page/home-page.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RegisterComponent } from './subPages/register/register.component';
+
+import { HttpClientModule } from '@angular/common/http';
+import { AuthComponent } from './APIs/auth/auth.component';
+import { GetDataComponent } from './APIs/get-data/get-data.component';
+import { BoardsComponent } from './APIs/boards/boards.component'
+
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,28 +28,33 @@ import { RegisterComponent } from './subPages/register/register.component';
     FooterComponent,
     LogInComponent,
     HomePageComponent,
-    RegisterComponent
+    RegisterComponent,
+    AuthComponent,
+    GetDataComponent,
+    BoardsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MatToolbarModule,
     MatButtonModule,
-    MDBBootstrapModule.forRoot(),
-    RouterModule.forRoot([
-      {
-        path: '',
-        component: HomePageComponent,
-      },
-      {
-        path: 'log-in',
-        component: LogInComponent
-      },
-      {
-        path: 'register',
-        component: RegisterComponent
-      }
-    ])
+    HttpClientModule,
+    FormsModule,
+    MDBBootstrapModule.forRoot()
+    // RouterModule.forRoot([
+    //   {
+    //     path: '',
+    //     component: HomePageComponent,
+    //   },
+    //   {
+    //     path: 'log-in',
+    //     component: LogInComponent
+    //   },
+    //   {
+    //     path: 'register',
+    //     component: RegisterComponent
+    //   }
+    // ])
   ]
   ,
   providers: [],

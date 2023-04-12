@@ -7,4 +7,19 @@ import { Component } from '@angular/core';
 })
 export class HomePageComponent {
 
+  constructor() {
+
+   }
+
+  ngOnInit(): void {
+    console.log('home initialized');
+  }
+
+
+
+  ngOnDestroy(): void {
+    console.log('Component destroyed');
+  }
+
+
 }
