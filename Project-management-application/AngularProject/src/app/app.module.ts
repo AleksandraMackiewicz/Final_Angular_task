@@ -21,6 +21,10 @@ import { GetDataComponent } from './APIs/get-data/get-data.component';
 import { BoardsComponent } from './APIs/boards/boards.component'
 
 import { FormsModule } from '@angular/forms';
+import {ReactiveFormsModule, FormControl, FormBuilder, NgForm, Validators } from '@angular/forms'
+import {ToastrService, ToastrModule} from 'ngx-toastr'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,11 +39,16 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     MatToolbarModule,
     MatButtonModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
+    ToastrModule.forRoot({
+
+    }),
     MDBBootstrapModule.forRoot()
     // RouterModule.forRoot([
     //   {
@@ -57,7 +66,7 @@ import { FormsModule } from '@angular/forms';
     // ])
   ]
   ,
-  providers: [],
+  providers: [AuthComponent],
   bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA]
 })

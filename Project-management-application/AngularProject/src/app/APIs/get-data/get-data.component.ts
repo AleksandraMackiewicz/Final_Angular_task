@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class GetDataComponent {
   list: any;
 
-  constructor(private httpClient: HttpClient){
+  constructor(public httpClient: HttpClient){
   this.list=[]
 }
     // ngOnInit(): void {
