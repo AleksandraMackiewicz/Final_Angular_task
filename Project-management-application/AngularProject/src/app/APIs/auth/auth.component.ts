@@ -3,6 +3,8 @@ import { GetDataComponent } from '../get-data/get-data.component';
 import { HttpClient } from '@angular/common/http';
 import { compileDeclareClassMetadata } from '@angular/compiler';
 
+import { catchError, map } from 'rxjs/operators';
+import { Observable, of, throwError } from 'rxjs';
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
@@ -13,18 +15,42 @@ export class AuthComponent extends GetDataComponent {
   apiurl: any;
   constructor(httpClient: HttpClient){
     super(httpClient);
-    this.apiurl='http://localhost:3000' //???
+    this.apiurl='http://localhost:3000/' //???
 
 
+  }
+
+
+
+
+  FindUser(code: any): Observable<string>{
+    console.log(code)
+    return this.httpClient.get<any[]>(this.apiurl+'users').pipe(
+      map(users => users.find(user => user.login === code)),
+      map(user => user?._id)
+    );
   }
   GetAll(){
-    return this.httpClient.get(this.apiurl);
+    return this.httpClient.get(this.apiurl+'users');
   }
+
+  SignIn(inputdata: { login: string, password: string }) {
+    const httpOptions = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    const body = JSON.stringify(inputdata);
+    return this.httpClient.post(this.apiurl + 'auth/signin', body, httpOptions);
+  }
+
   GetByCode(code: any){
-    return this.httpClient.get(this.apiurl + '/'+code);
+//GET /:userId not login...
+    return this.httpClient.get(this.apiurl + 'users/'+code);
+
   }
   ProceedRegister(inputdata: any){
-    return this.httpClient.post(this.apiurl, inputdata)
+    return this.httpClient.post(this.apiurl+'auth/signup', inputdata)
   }
   UpdateUser(code: any, inputdata: any){
     return this.httpClient.put(this.apiurl+'/'+code,inputdata)

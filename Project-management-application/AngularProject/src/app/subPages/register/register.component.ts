@@ -30,24 +30,25 @@ export class RegisterComponent extends AuthComponent {
 
   registerForm = this.builder.group({
    // id: this.builder.control('',Validators.compose([Validators.required, Validators.minLength(5)])), // ID SHOULD BE ADDED AUTOMATICLY
-    name: this.builder.control('', Validators.required),
+    name: this.builder.control('',Validators.compose([Validators.required, Validators.minLength(4)])),
+    login: this.builder.control('',Validators.compose([Validators.required, Validators.minLength(4)])),
     password: this.builder.control('', Validators.compose([Validators.required])),//Validators.pattern('((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,30})')
-    email: this.builder.control('', Validators.compose([Validators.required, Validators.email])),
-    isactive: this.builder.control(false)
+
   })
 
   proceedregister() {
 
+    const login = this.registerForm.get('login')?.value;
     const name = this.registerForm.get('name')?.value;
-    const email = this.registerForm.get('email')?.value;
     const password = this.registerForm.get('password')?.value;
 
-    this.data = {name: name,
-      email: email,
+    this.data = {
+      login: login,
+      name: name,
       password: password}
       console.log(this.data)
 
-
+      console.log(this.registerForm.value)
   if (this.registerForm.valid) {
     this.service.ProceedRegister(this.registerForm.value).subscribe(res => {
      this.toastr.success('Please contact admin for enable access','Registered Successfully')
@@ -70,34 +71,31 @@ export class RegisterComponent extends AuthComponent {
 
     )}
    else {
-     console.log('invalids')
-     this.toastr.warning('Enter the valid data')
-     if (this.registerForm.controls['name'].invalid) {
-      this.toastr.warning('name field is invalid, handle accordingly')
+
+     if (this.registerForm.controls['login'].invalid) {
+      this.toastr.warning('login field is invalid, handle accordingly')
     }
     if (this.registerForm.controls['password'].invalid) {
       this.toastr.warning('password field is invalid, handle accordingly')
     }
-    if (this.registerForm.controls['email'].invalid) {
-      this.toastr.warning('email field is invalid, handle accordingly')
+    if (this.registerForm.controls['name'].invalid) {
+      this.toastr.warning('name field is invalid, handle accordingly')
     }
 
-    if (this.registerForm.controls['isactive'].invalid) {
-      this.toastr.warning('isactive field is invalid, handle accordingly')
-    }
+
    }
 
 
   }
 
   // onSubmit(form: NgForm) {
+  //   const login = form.value.login;
   //   const name = form.value.name;
-  //   const email = form.value.email;
   //   const password = form.value.password;
 
 
-  //   this.data = {name: name,
-  //               email: email,
+  //   this.data = {login: login,
+  //               name: name,
   //               password: password}
 
   //   this.handleRefresh(this.data)

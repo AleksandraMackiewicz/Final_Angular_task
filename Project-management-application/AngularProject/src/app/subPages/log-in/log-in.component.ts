@@ -16,29 +16,34 @@ export class LogInComponent {
   password = "passwords"
   builder: FormBuilder = new FormBuilder;
   userdata: any
-constructor( httpClient: HttpClient, builder: FormBuilder, private service: AuthComponent, private router: Router, /*private toastr: ToastrService */){
-
+constructor( httpClient: HttpClient, builder: FormBuilder, private service: AuthComponent, private router: Router, private toastr: ToastrService ){
 }
 loginform = this.builder.group({
-  username: this.builder.control('', Validators.required),
+  login: this.builder.control('', Validators.required),
   password: this.builder.control('', Validators.required)
 
 })
 
 proceedlogin() {
-  //if (this.loginform.valid) {
-    //this.service.ProceedRegister(this.loginform.value).subscribe(res => {
-     // this.toastr.success('Please contact admin for enable access','Registered Successfully')
-      //this.router.navigate(['log-in'])
-   // }
-    //)
-   //else {
-    //this.toastr.warning('Enter the valid')
-  //}
-  this.service.GetByCode(this.loginform.value.username).subscribe(res=>{
-    this.userdata=res;
-    console.log(this.userdata);
+console.log(`loginform password ${this.loginform.value.login} and logindform password ${this.loginform.value.password}`)
 
-  })
+let inputdata: { login: any, password: any } = {
+  login: this.loginform.value.login,
+  password:this.loginform.value.password
 }
+
+
+
+
+if (this.loginform.valid) {
+  this.service.SignIn(inputdata).subscribe(res=>{
+    console.log('corret password')
+    //this.router.navigate(['']);
+       //        sessionStorage.setItem('login', this.userdata.id)?
+
+  },
+  err => { this.toastr.error('invalid credentials')
+})
 }
+}}
+
