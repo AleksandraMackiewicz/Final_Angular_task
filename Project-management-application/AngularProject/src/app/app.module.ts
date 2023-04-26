@@ -24,6 +24,10 @@ import { FormsModule } from '@angular/forms';
 import {ReactiveFormsModule, FormControl, FormBuilder, NgForm, Validators } from '@angular/forms'
 import {ToastrService, ToastrModule} from 'ngx-toastr'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatTableModule} from '@angular/material/table';
+
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { HomeBoardsComponent } from './subPages/home-boards/home-boards.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +39,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RegisterComponent,
     AuthComponent,
     GetDataComponent,
-    BoardsComponent
+    BoardsComponent,
+    HomeBoardsComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +51,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    DragDropModule,
     ToastrModule.forRoot({
 
     }),

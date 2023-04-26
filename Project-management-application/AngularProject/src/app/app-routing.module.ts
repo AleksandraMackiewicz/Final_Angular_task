@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HomeBoardsComponent } from './subPages/home-boards/home-boards.component';
 import { HomePageComponent } from './subPages/home-page/home-page.component';
 import { LogInComponent } from './subPages/log-in/log-in.component';
 import { RegisterComponent } from './subPages/register/register.component';
@@ -16,6 +17,10 @@ const routes: Routes = [
       {
         path: 'register',
         component: RegisterComponent
+      },
+      {
+        path: 'home-boards',
+        component: HomeBoardsComponent
       }
 ];
 

@@ -38,7 +38,7 @@ let inputdata: { login: any, password: any } = {
 if (this.loginform.valid) {
   this.service.SignIn(inputdata).subscribe(res=>{
     console.log('corret password')
-    //this.router.navigate(['']);
+    this.router.navigate(['home-boards']);
        //        sessionStorage.setItem('login', this.userdata.id)?
 
   },
